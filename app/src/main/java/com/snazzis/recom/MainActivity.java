@@ -12,10 +12,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-
+    RelativeLayout player;
+    ImageButton playerPlay;
+    ImageButton playerPrev;
+    ImageButton playerNext;
+    ImageButton playerPause;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +35,24 @@ public class MainActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
+        player = (RelativeLayout) findViewById(R.id.player);
+        playerPlay = (ImageButton) findViewById(R.id.playerPlay);
+        playerPrev = (ImageButton) findViewById(R.id.playerPrev);
+        playerNext = (ImageButton) findViewById(R.id.playerNext);
+        playerPause = (ImageButton) findViewById(R.id.playerPause);
+        View.OnClickListener playerButtonClick = new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                System.out.println("clicked to play button");
+                Integer currentButton = (Integer) v.getId();
+                System.out.println(currentButton);
+            }
+        };
+        playerPlay.setOnClickListener(playerButtonClick);
+        playerPrev.setOnClickListener(playerButtonClick);
+        playerNext.setOnClickListener(playerButtonClick);
+        playerPause.setOnClickListener(playerButtonClick);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
@@ -79,4 +103,5 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
 }

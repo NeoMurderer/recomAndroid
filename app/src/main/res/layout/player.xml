@@ -1,53 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:weightSum="1">
+
+
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    android:weightSum="1"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:weightSum="1"
+            android:baselineAligned="false"
+            android:background="?attr/colorPrimary"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Buckethead – Soothsayer"
+                android:id="@+id/playerCurrent"
+                android:autoText="true"
+                android:textColor="#ffffff"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="0dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="16dp" />
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:id="@+id/imageButton"
+                android:src="@drawable/ic_play_arrow_black"
+                android:background="#00000000"
+                android:padding="6dp"
+                android:layout_gravity="center_vertical|right" />
+
+        </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:weightSum="1"
-        android:baselineAligned="false"
-        android:background="?attr/colorPrimary"
-        >
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.98"
-            android:padding="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Buckethead"
-                android:id="@+id/textView"
-                android:autoText="true"
-                android:layout_marginTop="5dp"
-                android:textColor="#ffffff" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Soothslayer"
-                android:id="@+id/textView2"
-                android:layout_marginTop="5dp"
-                android:textColor="#ffffff" />
-        </LinearLayout>
+        android:layout_height="56dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="?attr/colorPrimary">
 
         <ImageButton
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageButton"
+            android:layout_height="48dp"
+            android:id="@+id/playerPrev"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_fast_rewind_white"
+            android:background="#00000000"
+            android:layout_weight="1"
+            android:padding="6dp" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:id="@+id/playerPlay"
             android:src="@drawable/ic_play_arrow_black"
             android:background="#00000000"
-            android:padding="10dp"
-            android:layout_gravity="center" />
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:clickable="true" />
 
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:id="@+id/playerPause"
+            android:src="@drawable/ic_pause_white"
+            android:background="#00000000"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="6dp"
+            android:onClick="playerButtonClick" />
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="48dp"
+            android:id="@+id/playerNext"
+            android:src="@drawable/ic_fast_forward_white"
+            android:background="#00000000"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:padding="6dp" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>
