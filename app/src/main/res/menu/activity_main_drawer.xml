@@ -6,10 +6,10 @@
             android:id="@+id/playlist"
             android:icon="@drawable/ic_library_music"
             android:title="Player" />
-        <!--<item-->
-            <!--android:id="@+id/nav_gallery"-->
-            <!--android:icon="@drawable/ic_menu_gallery"-->
-            <!--android:title="Gallery" />-->
+        <item
+            android:id="@+id/loginPage"
+            android:icon="@drawable/ic_lock_black"
+            android:title="Gallery" />
         <!--<item-->
             <!--android:id="@+id/nav_slideshow"-->
             <!--android:icon="@drawable/ic_menu_slideshow"-->
