@@ -14,7 +14,10 @@
             android:weightSum="1"
             android:baselineAligned="false"
             android:background="?attr/colorPrimary"
-            >
+            android:id="@+id/linearLayout"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -48,7 +51,8 @@
         android:layout_height="56dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="?attr/colorPrimary">
+        android:background="?attr/colorPrimary"
+        android:id="@+id/linearLayout2">
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -92,4 +96,17 @@
             android:layout_weight="1"
             android:padding="6dp" />
     </LinearLayout>
+
+    <SeekBar
+        android:layout_width="wrap_content"
+        android:layout_height="46dp"
+        android:id="@+id/volumeBar"
+        android:layout_above="@+id/linearLayout2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:paddingBottom="6dp"
+        android:paddingTop="6dp"
+        android:indeterminate="false" />
 </RelativeLayout>
