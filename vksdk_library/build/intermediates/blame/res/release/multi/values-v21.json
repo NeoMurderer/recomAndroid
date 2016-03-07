@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/res/merged/release/values-v21/values-v21.xml",
+        "outputFile": "/Users/neomurderer/Work/ReComAndroid/vksdk_library/build/intermediates/res/merged/release/values-v21/values-v21.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 517
                 },
                 "from": {
-                    "file": "/home/neomurderer/Work/recomAndroid/vksdk_library/src/main/res/values-v21/styles.xml",
+                    "file": "/Users/neomurderer/Work/ReComAndroid/vksdk_library/src/main/res/values-v21/styles.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,

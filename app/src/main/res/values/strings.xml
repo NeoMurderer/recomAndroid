@@ -21,7 +21,7 @@
         completions."
     </string>
     <string name="preference_file_key">testKey</string>
-    <string name="vk_token">vk_token</string>
+    <string name="auth_token">auth_token</string>
     <integer name="com_vk_sdk_AppId">5334210</integer>
 
 </resources>

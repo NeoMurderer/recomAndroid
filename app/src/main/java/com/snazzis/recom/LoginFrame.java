@@ -1,53 +1,46 @@
 package com.snazzis.recom;
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.Toast;
-
-import com.vk.sdk.VKAccessToken;
-import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKScope;
 import com.vk.sdk.VKSdk;
-import com.vk.sdk.api.VKError;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
 
 public class LoginFrame extends Fragment {
 
     final String LOG_TAG = "LoginPage";
 
+    @Bind(R.id.vkLogin) Button vkLogin;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.d(LOG_TAG, " onCreateView");
-        final View view = inflater.inflate(R.layout.activity_login, null);;
+        Log.d(LOG_TAG, "onCreateView");
+        View loginView = inflater.inflate(R.layout.activity_login, null);;
 
-        vkLogin = (Button) view.findViewById(R.id.vkLogin);
+        ButterKnife.bind(this, loginView);
+
         View.OnClickListener login = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Toast.makeText(getContext(), "Auth to VK", Toast.LENGTH_SHORT).show();
+                Log.d(LOG_TAG, "Login to VK");
                 VKSdk.login(getActivity(), sMyScope);
             }
         };
         vkLogin.setOnClickListener(login);
-        return view;
+        return loginView;
     }
 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d(LOG_TAG, " onActivityCreated");
+        Log.d(LOG_TAG, "onActivityCreated");
     }
-
-    Button vkLogin;
-    Activity context = null;
     private static final String[] sMyScope = new String[]{
             VKScope.FRIENDS,
             VKScope.WALL,
@@ -56,25 +49,10 @@ public class LoginFrame extends Fragment {
             VKScope.MESSAGES,
             VKScope.DOCS
     };
-    SharedPreferences.Editor editor;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Инициализация приложения...
-//        SharedPreferences sharedPref = getApplicationContext().getSharedPreferences(
-//                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
-//        editor = sharedPref.edit();
-//
-//        String vk_token = getResources().getString(R.string.vk_token);
-////        if(vk_token.length()>0) {
-////            redirectToPlayer();
-////        }
+
 
     }
-    private void redirectToPlayer() {
-        Log.d(LOG_TAG,"Redirect to player");
-    }
-
-
-
 }

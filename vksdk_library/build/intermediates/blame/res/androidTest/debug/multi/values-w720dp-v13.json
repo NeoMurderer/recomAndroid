@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/res/merged/androidTest/debug/values-w720dp-v13/values-w720dp-v13.xml",
+        "outputFile": "/Users/neomurderer/Work/ReComAndroid/vksdk_library/build/intermediates/res/merged/androidTest/debug/values-w720dp-v13/values-w720dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 111
                 },
                 "from": {
-                    "file": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/bundles/debug/res/values-w720dp-v13/values-w720dp-v13.xml",
+                    "file": "/Users/neomurderer/Work/ReComAndroid/vksdk_library/build/intermediates/bundles/debug/res/values-w720dp-v13/values-w720dp-v13.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

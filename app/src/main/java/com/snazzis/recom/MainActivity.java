@@ -1,8 +1,10 @@
 package com.snazzis.recom;
 
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
 import android.support.design.widget.NavigationView;
@@ -14,19 +16,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;
-
 import com.vk.sdk.VKAccessToken;
 import com.vk.sdk.VKCallback;
 import com.vk.sdk.VKSdk;
 import com.vk.sdk.api.VKError;
 
-import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    SharedPreferences sharedPref;
+    SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +41,13 @@ public class MainActivity extends AppCompatActivity
         toggle.syncState();
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
+        sharedPref = getApplicationContext().getSharedPreferences(
+                getString(R.string.preference_file_key), Context.MODE_PRIVATE);
+        editor = sharedPref.edit();
+
     }
 
     @Override
@@ -61,16 +69,11 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
     @SuppressWarnings("StatementWithEmptyBody")
@@ -120,12 +123,8 @@ public class MainActivity extends AppCompatActivity
         if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
             @Override
             public void onResult(VKAccessToken res) {
-                Log.d("MainActivity", "Logged");
-
-                Log.d("MainActivityVkToken", String.valueOf(res.hashCode()));
-//                editor.putInt(getString(R.string.vk_token), resultCode);
-//                editor.commit();
-//                redirectToPlayer();
+                Log.d("VKAccessToken",res.accessToken);
+                serverLogin(res);
             }
 
             @Override
@@ -135,5 +134,35 @@ public class MainActivity extends AppCompatActivity
         })) {
             super.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private void serverLogin(VKAccessToken res) {
+        try {
+            AjaxRequest requester = new AjaxRequest();
+            String response = requester.login(res.accessToken, Integer.valueOf(res.userId));
+
+            Log.d("accessToken",response);
+            JSONObject mainObject = new JSONObject(response);
+
+            String token = mainObject.getString("token");
+            if(token.length()>0) {
+                Log.d("Success login",token);
+                editor.putString(getString(R.string.auth_token), token);
+                editor.commit();
+                String defaultValue = sharedPref.getString(getString(R.string.auth_token), "emptyToken");
+
+                Log.d("tokenMainActivity",defaultValue);
+                displayView(R.id.playlist);
+            }
+            else {
+
+                Log.d("Error login",response);
+            }
+        }
+        catch (Throwable t) {
+            t.printStackTrace();
+        }
+
+
     }
 }
