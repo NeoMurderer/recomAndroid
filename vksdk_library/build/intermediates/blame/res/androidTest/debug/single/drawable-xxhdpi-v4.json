@@ -1,10 +1,10 @@
 [
     {
-        "merged": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/ic_ab_app.png",
-        "source": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/ic_ab_app.png"
+        "merged": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/ic_ab_app.png",
+        "source": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/ic_ab_app.png"
     },
     {
-        "merged": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/ic_ab_done.png",
-        "source": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/ic_ab_done.png"
+        "merged": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable-xxhdpi-v4/ic_ab_done.png",
+        "source": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/bundles/debug/res/drawable-xxhdpi-v4/ic_ab_done.png"
     }
 ]

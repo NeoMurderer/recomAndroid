@@ -1,6 +1,7 @@
 package com.snazzis.recom;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.Fragment;
@@ -10,8 +11,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.vk.sdk.VKAccessToken;
+import com.vk.sdk.VKCallback;
+import com.vk.sdk.VKSdk;
+import com.vk.sdk.api.VKError;
+
+import org.java_websocket.handshake.ServerHandshake;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -101,5 +113,27 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, final int resultCode, Intent data) {
+        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
+            @Override
+            public void onResult(VKAccessToken res) {
+                Log.d("MainActivity", "Logged");
+
+                Log.d("MainActivityVkToken", String.valueOf(res.hashCode()));
+//                editor.putInt(getString(R.string.vk_token), resultCode);
+//                editor.commit();
+//                redirectToPlayer();
+            }
+
+            @Override
+            public void onError(VKError error) {
+                // User didn't pass Authorization
+            }
+        })) {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }

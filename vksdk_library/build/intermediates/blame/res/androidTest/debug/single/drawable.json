@@ -1,14 +1,14 @@
 [
     {
-        "merged": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable/vk_share_send_button_background.xml",
-        "source": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/bundles/debug/res/drawable/vk_share_send_button_background.xml"
+        "merged": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable/vk_gray_transparent_shape.xml",
+        "source": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/bundles/debug/res/drawable/vk_gray_transparent_shape.xml"
     },
     {
-        "merged": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable/vk_clear_shape.xml",
-        "source": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/bundles/debug/res/drawable/vk_clear_shape.xml"
+        "merged": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable/vk_share_send_button_background.xml",
+        "source": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/bundles/debug/res/drawable/vk_share_send_button_background.xml"
     },
     {
-        "merged": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable/vk_gray_transparent_shape.xml",
-        "source": "/Users/neomurderer/AndroidStudioProjects/ReCom/vksdk_library/build/intermediates/bundles/debug/res/drawable/vk_gray_transparent_shape.xml"
+        "merged": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/res/merged/androidTest/debug/drawable/vk_clear_shape.xml",
+        "source": "/home/neomurderer/Work/recomAndroid/vksdk_library/build/intermediates/bundles/debug/res/drawable/vk_clear_shape.xml"
     }
 ]

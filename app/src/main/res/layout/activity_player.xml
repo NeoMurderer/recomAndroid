@@ -2,10 +2,12 @@
 
 
 <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     android:weightSum="1"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/playerLayout">
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -14,7 +16,8 @@
         android:baselineAligned="false"
         android:background="?attr/colorPrimary"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:id="@+id/playerHead">
 
         <TextView
             android:layout_width="wrap_content"
@@ -34,7 +37,18 @@
         <ImageButton
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:id="@+id/imageButton"
+            android:id="@+id/closePlayer"
+            android:src="@drawable/ic_close_white"
+            android:background="#00000000"
+            android:padding="6dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical|right"
+            android:visibility="invisible" />
+
+        <ImageButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:id="@+id/playerPlayHead"
             android:src="@drawable/ic_play_arrow_black"
             android:background="#00000000"
             android:padding="6dp"
@@ -82,7 +96,6 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:padding="6dp"
-            android:onClick="playerButtonClick"
             android:clickable="false" />
 
         <ImageButton

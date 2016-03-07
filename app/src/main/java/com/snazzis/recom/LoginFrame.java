@@ -75,25 +75,6 @@ public class LoginFrame extends Fragment {
         Log.d(LOG_TAG,"Redirect to player");
     }
 
-    @Override
-    public void onActivityResult(int requestCode, final int resultCode, Intent data) {
-        if (!VKSdk.onActivityResult(requestCode, resultCode, data, new VKCallback<VKAccessToken>() {
-            @Override
-            public void onResult(VKAccessToken res) {
-                Log.d("MainActivity","Logged");
-                Log.d("MainActivityVkToken",res.accessToken);
-                editor.putInt(getString(R.string.vk_token), resultCode);
-                editor.commit();
-                redirectToPlayer();
-            }
-            @Override
-            public void onError(VKError error) {
-                // User didn't pass Authorization
-            }
-        })) {
-            super.onActivityResult(requestCode, resultCode, data);
-        }
-    }
 
 
 }
