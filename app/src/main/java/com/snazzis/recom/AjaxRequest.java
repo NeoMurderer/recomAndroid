@@ -15,9 +15,11 @@ import okhttp3.Response;
 
 public class AjaxRequest {
     OkHttpClient client = new OkHttpClient();
-    String apiUrl = "http://192.168.88.152:3000/";
+    String apiUrl = "http://192.168.0.105:3000/";
     public static final MediaType JSON
             = MediaType.parse("application/json; charset=utf-8");
+    public String accessToken;
+
     String get(String url) throws IOException {
         Request request = new Request.Builder()
                 .url(apiUrl + url)
@@ -30,6 +32,8 @@ public class AjaxRequest {
         RequestBody body = RequestBody.create(JSON, json);
         Request request = new Request.Builder()
                 .url(apiUrl + url)
+
+                .header("Authorization: Bearer", accessToken )
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();

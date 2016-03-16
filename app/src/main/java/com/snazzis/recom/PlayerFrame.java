@@ -2,6 +2,7 @@ package com.snazzis.recom;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,8 +16,13 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -68,6 +74,8 @@ public class PlayerFrame extends Fragment {
         }
     };
     WebSocketClient mWebSocketClient;
+    private java.lang.String accessToken;
+
     public void closePlayer(){
         int height = playerLayout.getHeight();
         playerLayout.animate().translationY(height - playerHead.getHeight());
@@ -109,13 +117,13 @@ public class PlayerFrame extends Fragment {
         playerView = inflater.inflate(R.layout.activity_player, null);
         ButterKnife.bind(this, playerView);
         initEventListeners();
-        connectWebSocket();
 
         sharedPref = getActivity().getApplicationContext().getSharedPreferences(getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        String defaultValue = sharedPref.getString(getString(R.string.auth_token), "emptyToken");
+        accessToken = sharedPref.getString(getString(R.string.auth_token), "emptyToken");
 
-        Log.d("Access token",defaultValue);
+        Log.d("Access token",accessToken);
+        connectWebSocket();
         return playerView;
 
     }
@@ -125,62 +133,67 @@ public class PlayerFrame extends Fragment {
     }
     View.OnClickListener playerButtonClick =new View.OnClickListener() {
             public void onClick(View v) {
-                JSONObject message = new JSONObject();;
-                System.out.println("clicked to play button");
-                Integer currentButton = v.getId();
-                System.out.println(currentButton);
+                String currentButton = v.getResources().getResourceName(v.getId());
                 try {
-                    message.put("action",currentButton);
+                    sendMessage(currentButton);
+                } catch (IOException e) {
+                    e.printStackTrace();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                sendMessage(message);
             }
         };
 
     private void connectWebSocket() {
-//        URI uri;
-//        try {
-//            uri = new URI("ws://192.168.0.105:3000/cable?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOjF9.OrBxjjETOmrEMoiKcpQ5BU0AN974bIttqjFScg3KGJQ");
-//        } catch (URISyntaxException e) {
-//            e.printStackTrace();
-//
-//            Log.i("Websocket", "FATAL");
-//            return;
-//        }
-//
-//        mWebSocketClient = new WebSocketClient(uri) {
-//            @Override
-//            public void onOpen(ServerHandshake serverHandshake) {
-//                Log.i("Websocket", "Opened");
-//                mWebSocketClient.send("Hello from " + Build.MANUFACTURER + " " + Build.MODEL);
-//            }
-//
-//            @Override
-//            public void onMessage(String s) {
-//                final String message = s;
-//                playerView.post(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        Log.d("Player frame", message);
-//                    }
-//                });
-//            }
-//
-//            @Override
-//            public void onClose(int i, String s, boolean b) {
-//                Log.i("Websocket", "Closed " + s);
-//            }
-//
-//            @Override
-//            public void onError(Exception e) {
-//                Log.i("Websocket", "Error " + e.getMessage());
-//            }
-//        };
-//        mWebSocketClient.connect();
+        URI uri;
+        try {
+            uri = new URI("ws://192.168.0.105:3000/cable?token="+accessToken);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+
+            Log.i("Websocket", "FATAL");
+            return;
+        }
+
+        mWebSocketClient = new WebSocketClient(uri) {
+            @Override
+            public void onOpen(ServerHandshake serverHandshake) {
+                Log.i("Websocket", "Opened");
+                mWebSocketClient.send("{\"command\":\"subscribe\",\"identifier\":\"{\\\"channel\\\":\\\"EventsChannel\\\"}\"}");
+            }
+
+            @Override
+            public void onMessage(String s) {
+                final String message = s;
+                playerView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("Player frame", message);
+                    }
+                });
+            }
+
+            @Override
+            public void onClose(int i, String s, boolean b) {
+                Log.i("Websocket", "Closed " + s);
+            }
+
+            @Override
+            public void onError(Exception e) {
+                Log.i("Websocket", "Error " + e.getMessage());
+            }
+        };
+        mWebSocketClient.connect();
     }
-    public void sendMessage(JSONObject message) {
-        mWebSocketClient.send(String.valueOf(message));
+    public void sendMessage(String message) throws IOException, JSONException {
+        AjaxRequest requester = new AjaxRequest();
+        requester.accessToken = accessToken;
+        JSONObject obj = new JSONObject();
+
+        obj.put("action",message);
+        obj.put("platform","mobile");
+
+        String response = requester.post("/fire", obj.toString());
     }
 
 }
